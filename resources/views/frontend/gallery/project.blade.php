@@ -10,7 +10,7 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li class="active">Portfolio</li>
+                        <li class="active">Project</li>
                     </ul>
                 </div>
             </div>

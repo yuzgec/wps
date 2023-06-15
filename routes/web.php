@@ -27,7 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
-    Route::get('/studio', [HomeController::class, 'studio'])->name('studio');
+    Route::get('/studio-rental', [HomeController::class, 'studio'])->name('studio');
     Route::get('/p/{slug}', [HomeController::class, 'studio_detail'])->name('studio.detail');
     Route::get('/services', [HomeController::class, 'services'])->name('services');
 
@@ -41,7 +41,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::get('/project', [HomeController::class, 'project'])->name('project');
     Route::get('/kinefinity-cinema-camera', [HomeController::class, 'kinefinity'])->name('kinefinity');
-    Route::get('/rental', [HomeController::class, 'rental'])->name('rental');
+
+    Route::get('/rentals', [HomeController::class, 'rental'])->name('rental');
+    Route::get('/rentals/{url}', [HomeController::class, 'rentals'])->name('rentals');
+    Route::get('/rentals/{categoryslug}/{productslug}', [HomeController::class, 'product'])->name('product');
 });
 
 

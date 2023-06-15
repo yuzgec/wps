@@ -2533,7 +2533,7 @@ label.error#captcha-error {
 	align-items: center;
 	display: flex;
 	flex-shrink: 0;
-	height: 30%;
+	height: 25%;
 	margin-bottom: -4px;
 }
 

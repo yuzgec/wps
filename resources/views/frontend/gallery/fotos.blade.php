@@ -26,8 +26,7 @@
                             <div class="image-frame-wrapper image-frame-wrapper-overlay-bottom image-frame-wrapper-overlay-bottom-show image-frame-wrapper-overlay-bottom-shadow image-frame-wrapper-overlay-bottom-shadow-light image-frame-wrapper-align-end">
                                 <img src="{{ (!$item->getFirstMediaUrl('page')) ? '/backend/resimyok.jpg': $item->getFirstMediaUrl('page', 'img')}}" class="img-fluid" alt="">
                                 <div class="image-frame-action flex-column align-items-center">
-                                    <h4 class="text-color-light font-weight-bold mb-0">{{ $item->title }}</h4>
-                                    <p class="mb-0 text-color-light font-weight-light">({{ $item->get_gallery_count }}) Galleries </p>
+                                    <h4 class="text-color-light font-weight-bold mb-0">{{ $item->title }} <small>({{ $item->get_gallery_count }})</small> </h4>
                                 </div>
                             </div>
                         </div>

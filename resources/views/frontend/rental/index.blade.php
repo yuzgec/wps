@@ -14,12 +14,92 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="font-weight-bold">Apparatuur Verhuur</h1>
-
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="container container-fluid">
+        <div class="row">
+            <aside class="sidebar col-md-4 col-lg-3 order-2 order-md-1">
+                <div class="accordion accordion-default accordion-toggle accordion-style-1" role="tablist">
+
+                    <div class="card">
+                        <div class="card-header accordion-header" role="tab" id="categories">
+                            <h5 class="mb-0">
+                                <a href="#" data-bs-toggle="collapse" data-bs-target="#toggleCategories" aria-expanded="false" aria-controls="toggleCategories">Categories</a>
+                            </h5>
+                        </div>
+                        <div id="toggleCategories" class="accordion-body collapse show p-0" role="tabpanel" aria-labelledby="categories">
+                            <div class="card-body">
+                                <ul class="list list-unstyled list-borders">
+                                    @foreach($categories as $item)
+                                    <li>
+                                        <a href="{{ route('rentals', $item->slug) }}" title="{{ $item->title }}"><i class="fas fa-angle-right text-color-primary ms-1 me-1 pe-2"></i>
+                                            {{ $item->title }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div class="col-md-8 col-lg-9 order-1 order-md-2 mb-5 mb-md-0">
+                <div class="row">
+                    @foreach($categories as $item)
+                    <div class="col-sm-6 col-md-4 mb-4">
+                        <div class="image-frame image-frame-border image-frame-style-1 image-frame-effect-2 image-frame-effect-1 overlay overlay-op-4 overlay-show">
+                            <div class="image-frame-wrapper image-frame-wrapper-overlay-bottom image-frame-wrapper-overlay-bottom-show image-frame-wrapper-overlay-bottom-shadow image-frame-wrapper-overlay-bottom-shadow-light image-frame-wrapper-align-end">
+                                <img src="{{ (!$item->getFirstMediaUrl('page')) ? '/backend/resimyok.jpg': $item->getFirstMediaUrl('page', 'img')}}" class="img-fluid" alt="{{ $item->title }} - Wester Park Studio Amsterdam">
+                                <div class="image-frame-action flex-column align-items-center">
+                                    <h4 class="text-color-light font-weight-bold mb-0 bg-dark p-1 border-radius-0">
+                                        <a href="{{ route('rentals', $item->slug) }}"
+                                           title="{{ $item->title }}"
+                                           class="text-color-light">
+                                            {{ $item->title }}
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <hr class="mt-5 mb-4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto mb-3 mb-sm-0">
+                        <span>Showing 1-9 of 60 results</span>
+                    </div>
+                    <div class="col-auto">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination mb-0">
+                                <li class="page-item">
+                                    <a class="page-link prev" href="#" aria-label="Previous">
+                                        <span><i class="fas fa-angle-left" aria-label="Previous"></i></span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">...</li>
+                                <li class="page-item"><a class="page-link" href="#">15</a></li>
+                                <li class="page-item">
+                                    <a class="page-link next" href="#" aria-label="Next">
+                                        <span><i class="fas fa-angle-right" aria-label="Next"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{{--
     <div class="container container-lg-custom mb-4">
 
         <ul class="nav sort-source mb-3" data-sort-id="products" data-option-key="filter" data-plugin-options="{'layoutMode': 'fitRows', 'filter': '*'}">
@@ -75,5 +155,6 @@
         </div>
 
     </div>
+--}}
 
 @endsection

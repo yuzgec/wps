@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use App\Models\GalleryCategory;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Service;
 use App\Models\Video;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -24,11 +26,45 @@ class HomeController extends Controller
 
     public function rental(){
 
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        SEOMeta::setTitle("Apparatuur Verhuur | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
 
         return view('frontend.rental.index');
+    }
+
+
+    public function rentals($url){
+
+        SEOMeta::setTitle("Apparatuur Verhuur | WesterPark Studio | Amsterdam");
+        SEOMeta::setDescription("Wester Park Studio");
+        SEOMeta::setCanonical(url()->full());
+
+        $show = ProductCategory::whereHas('translations', function ($query) use ($url) {
+            $query->where('slug', $url);
+        })->first();
+
+        $all = Product::whereHas('getCategory',  function ($query) use ($show) {
+            $query->where('category_id', $show->id);
+        })->get();
+
+        return view('frontend.rental.detail',compact('all','show'));
+    }
+
+    public function product($categoryurl,$producturl){
+
+        //dd($category,$product);
+        $product = Product::whereHas('translations', function ($query) use ($producturl) {
+            $query->where('slug', $producturl);
+        })->first();
+
+        //dd($product);
+
+        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        SEOMeta::setDescription("Wester Park Studio");
+        SEOMeta::setCanonical(url()->full());
+
+        return view('frontend.rental.product', compact('product'));
     }
 
     public function studio(){
@@ -165,6 +201,6 @@ class HomeController extends Controller
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
 
-        return view('frontend.rental.index');
+        return view('frontend.studio.service');
     }
 }

@@ -1,5 +1,10 @@
 @extends('frontend.layout.app')
 @section('content')
+
+
+
+
+
     <section class="page-header mb-0">
         <div class="container">
             <div class="row align-items-center">

@@ -35,7 +35,7 @@
     </section>
 
 
-    <section class="section bg-light-5">
+    <section class="section">
         <div class="container">
             <div class="row mb-4">
                 <div class="col">

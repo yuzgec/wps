@@ -45,7 +45,7 @@
             <div class="header-row justify-content-between">
                 <div class="header-column">
                     <div class="header-logo">
-                        <a href="{{ route('rental') }}">
+                        <a href="{{ route('home') }}">
                             <img alt="{{ config('app.name') }}" width="200px" src="/logo.jpg">
                         </a>
                     </div>

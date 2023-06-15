@@ -18,11 +18,8 @@
         </div>
     </section>
 
-
     <div class="container">
-
         <div class="row mb-3 mt-4">
-
             @foreach($all as $item)
             <div class="col-md-4 text-center mb-2">
                 <a href="{{ route('foto.detail', [$show->slug,$item->slug]) }}">
@@ -39,11 +36,5 @@
             </div>
             @endforeach
         </div>
-
-
-
-
     </div>
-
-
 @endsection

@@ -22,13 +22,6 @@
                 </div>
             </div>
 
-            <ul class="nav nav-tabs nav-fill" data-bs-toggle="tabs">
-                @foreach($Kategori->where('parent_id', 0)  as $item)
-                <li class="nav-item">
-                    <a href="#{{ $item->slug }}" class="nav-link @if ($loop->first) active @endif " data-bs-toggle="tab">{{ $item->title }}</a>
-                </li>
-                @endforeach
-            </ul>
 
             <div class="table-responsive p-2">
                 <table class="table table-hover table-striped table-bordered ">

@@ -56,6 +56,17 @@
             </div>
             <div class="col-md-9">
                 {!! $show->desc !!}
+                <div class="lightbox mt-3" data-plugin-options="{'delegate': 'a', 'type': 'image', 'gallery': {'enabled': true}}">
+                    <div class="row">
+                        @foreach($show->getMedia('gallery') as $item)
+                            <div class="col-md-3 mb-3 ">
+                                <a href="{{ $item->getUrl('img') }}">
+                                    <img class="img-fluid" src="{{ $item->getUrl('thumb') }}" alt="{{ $show->title.' - '.$all->title.' - Wester Park Studio Amsterdam'}}">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </div>
