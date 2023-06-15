@@ -35,8 +35,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
     Route::get('/video', [HomeController::class, 'video'])->name('video');
 
-    Route::get('/foto', [HomeController::class, 'foto'])->name('foto');
-    Route::get('/foto/{slug}', [HomeController::class, 'foto'])->name('foto.');
+    Route::get('/projects', [HomeController::class, 'foto'])->name('foto');
+    Route::get('/projects/{slug}', [HomeController::class, 'foto_gallery'])->name('gallery.detail');
     Route::get('/projects/{slug}/{title}', [HomeController::class, 'foto_detail'])->name('foto.detail');
 
     Route::get('/project', [HomeController::class, 'project'])->name('project');

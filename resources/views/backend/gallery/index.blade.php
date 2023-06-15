@@ -1,5 +1,5 @@
 @extends('backend.layout.app')
-@section('title', 'Services')
+@section('title', 'Foto Gallery')
 @section('content')
     <div class="col-12 col-md-8">
         <div class="card">

@@ -12,14 +12,14 @@ class GalleryController extends Controller
     public function index()
     {
         $All = Gallery::with('getCategory')->orderBy('rank')->get();
-        $Kategori = GalleryCategory::all();
+        $Kategori = GalleryCategory::get()->toFlatTree();
 
         return view('backend.gallery.index', compact('All', 'Kategori'));
     }
 
     public function create()
     {
-        $Kategori = GalleryCategory::all();
+        $Kategori = GalleryCategory::get()->toFlatTree();
         return view('backend.gallery.create',compact('Kategori'));
     }
 

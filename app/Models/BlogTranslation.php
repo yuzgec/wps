@@ -29,6 +29,8 @@ class BlogTranslation extends Model implements Viewable
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->allowDuplicateSlugs();
+
     }
 }

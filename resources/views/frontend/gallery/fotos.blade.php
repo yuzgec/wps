@@ -21,7 +21,7 @@
         <div class="row mb-3 mt-4">
             @foreach($all as $item)
                 <div class="col-md-4 text-center mb-2">
-                    <a href="">
+                    <a href="{{ route('gallery.detail', $item->slug) }}">
                         <div class="image-frame image-frame-border image-frame-style-1 image-frame-effect-2 image-frame-effect-1 overlay overlay-op-4 overlay-show">
                             <div class="image-frame-wrapper image-frame-wrapper-overlay-bottom image-frame-wrapper-overlay-bottom-show image-frame-wrapper-overlay-bottom-shadow image-frame-wrapper-overlay-bottom-shadow-light image-frame-wrapper-align-end">
                                 <img src="{{ (!$item->getFirstMediaUrl('page')) ? '/backend/resimyok.jpg': $item->getFirstMediaUrl('page', 'img')}}" class="img-fluid" alt="">

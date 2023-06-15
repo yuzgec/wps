@@ -7,6 +7,7 @@ use App\Models\GalleryCategory;
 use App\Models\Service;
 use App\Models\Video;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -54,7 +55,7 @@ class HomeController extends Controller
 
     public function contactus(){
 
-        SEOMeta::setTitle("Contactt Us | WesterPark Studio | Amsterdam");
+        SEOMeta::setTitle("Contact Us | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
 
@@ -72,7 +73,7 @@ class HomeController extends Controller
 
     public function video(){
 
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        SEOMeta::setTitle("Video Gallery | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
         $all = Video::all();
@@ -81,33 +82,15 @@ class HomeController extends Controller
 
     public function foto(){
 
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        SEOMeta::setTitle("Foto Gallery | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
-
         $all = GalleryCategory::with('getGallery')->withCount('getGallery')->get();
-        //dd($all->getGallery());
-
         return view('frontend.gallery.fotos', compact('all'));
     }
 
 
-    public function fotochild($url){
-
-        $show = Gallery::whereHas('translations', function ($query) use ($url) {
-            $query->where('slug', $url);
-        })->first();
-
-        $all = Gallery::where('category', $show->id)->get();
-
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
-        SEOMeta::setDescription("Wester Park Studio");
-        SEOMeta::setCanonical(url()->full());
-
-        return view('frontend.gallery.fotochild', compact('show', 'all'));
-    }
-
-    public function foto_detail($url){
+    public function foto_gallery(Request $request, $url){
 
 
         $show = GalleryCategory::whereHas('translations', function ($query) use ($url) {
@@ -115,8 +98,24 @@ class HomeController extends Controller
         })->first();
 
         $all = Gallery::where('category', $show->id)->get();
+        SEOMeta::setTitle($show->title." | WesterPark Studio | Amsterdam");
+        SEOMeta::setDescription("Wester Park Studio");
+        SEOMeta::setCanonical(url()->full());
 
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        return view('frontend.gallery.fotochild', compact('show', 'all'));
+    }
+
+    public function foto_detail($slug, $url){
+
+        $show = GalleryCategory::whereHas('translations', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->first();
+
+        $all = Gallery::whereHas('translations', function ($query) use ($url) {
+            $query->where('slug', $url);
+        })->first();
+
+        SEOMeta::setTitle($show->title." | ". $all->title ." | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
 
@@ -161,7 +160,6 @@ class HomeController extends Controller
     }
 
     public function services(){
-
 
         SEOMeta::setTitle("WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");

@@ -24,13 +24,12 @@ class GalleryCategoryTranslation extends Model
         return LogOptions::defaults()->logOnly(['title']);
     }
 
-
-
-
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->allowDuplicateSlugs();
+
     }
 }

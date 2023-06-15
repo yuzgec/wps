@@ -5,11 +5,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-start">
-                    <h1 class="font-weight-bold">Contact Us</h1>
+                    <h1 class="font-weight-bold">Contact Westerpark Studio</h1>
                 </div>
                 <div class="col-md-6">
                     <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li class="active">Contact Us</li>
                     </ul>
                 </div>
