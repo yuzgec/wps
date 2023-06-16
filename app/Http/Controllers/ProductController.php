@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\ProdoctCategoryPivot;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -22,14 +23,15 @@ class ProductController extends Controller
     public function create()
     {
         $Kategori = ProductCategory::get()->toFlatTree();
-        return view('backend.product.create',compact('Kategori'));
+        $Brand = Brand::all();
+        return view('backend.product.create',compact('Kategori', 'Brand'));
     }
 
     public function store(Request $request)
     {
 
         DB::transaction(function () use($request){
-            $New = Product::create($request->except('_token', 'image', 'gallery', 'category', 'web_tr', 'mobil_tr', 'web_en', 'mobil_en', 'web_ru', 'mobil_ru',));
+            $New = Product::create($request->except('_token', 'image', 'gallery', 'category', 'web_nl', 'mobil_nl', 'web_en', 'mobil_en'));
 
             if ($request->hasfile('image')) {
                 $New->addMedia($request->image)->toMediaCollection('page');
@@ -41,12 +43,12 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->hasfile('web_tr')) {
-                $New->addMedia($request->web_tr)->toMediaCollection('web_tr');
+            if ($request->hasfile('web_nl')) {
+                $New->addMedia($request->web_nl)->toMediaCollection('web_nl');
             }
 
-            if ($request->hasfile('mobil_tr')) {
-                $New->addMedia($request->mobil_tr)->toMediaCollection('mobil_tr');
+            if ($request->hasfile('mobil_nl')) {
+                $New->addMedia($request->mobil_nl)->toMediaCollection('mobil_nl');
             }
 
             if ($request->hasfile('web_en')) {
@@ -96,7 +98,7 @@ class ProductController extends Controller
     {
 
         DB::transaction(function () use($request, $Update) {
-            $Update->update($request->except('_token', 'image', 'gallery', 'category', 'web_tr', 'mobil_tr', 'web_en', 'mobil_en', 'web_ru', 'mobil_ru'));
+            $Update->update($request->except('_token', 'image', 'gallery', 'category', 'web_nl', 'mobil_nl', 'web_en', 'mobil_en'));
 
             if ($request->removeImage == "1") {
                 $Update->media()->where('collection_name', 'page')->delete();
@@ -107,15 +109,14 @@ class ProductController extends Controller
                 $Update->addMedia($request->image)->toMediaCollection('page');
             }
 
-
-            if ($request->hasfile('web_tr')) {
-                $Update->media()->where('collection_name', 'web_tr')->delete();
-                $Update->addMedia($request->web_tr)->toMediaCollection('web_tr');
+            if ($request->hasfile('web_nl')) {
+                $Update->media()->where('collection_name', 'web_nl')->delete();
+                $Update->addMedia($request->web_nl)->toMediaCollection('web_nl');
             }
 
-            if ($request->hasfile('mobil_tr')) {
-                $Update->media()->where('collection_name', 'mobil_tr')->delete();
-                $Update->addMedia($request->mobil_tr)->toMediaCollection('mobil_tr');
+            if ($request->hasfile('mobil_nl')) {
+                $Update->media()->where('collection_name', 'mobil_nl')->delete();
+                $Update->addMedia($request->mobil_nl)->toMediaCollection('mobil_nl');
             }
 
             if ($request->hasfile('web_en')) {
@@ -127,17 +128,6 @@ class ProductController extends Controller
                 $Update->media()->where('collection_name', 'mobil_en')->delete();
                 $Update->addMedia($request->mobil_en)->toMediaCollection('mobil_en');
             }
-
-            if ($request->hasfile('web_ru')) {
-                $Update->media()->where('collection_name', 'web_ru')->delete();
-                $Update->addMedia($request->web_ru)->toMediaCollection('web_ru');
-            }
-
-            if ($request->hasfile('mobil_ru')) {
-                $Update->media()->where('collection_name', 'mobil_ru')->delete();
-                $Update->addMedia($request->mobil_ru)->toMediaCollection('mobil_ru');
-            }
-
 
             if ($request->hasfile('gallery')) {
                 foreach ($request->gallery as $item) {

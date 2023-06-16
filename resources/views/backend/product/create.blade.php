@@ -47,7 +47,7 @@
                                     <img src="/frontend/flag/{{ $localeCode }}.svg" width="20px"><span  style="margin-left:10px">{{ $properties['native'] }} dili ilgili ayarları yapıyorsunuz.</span>
                                 </div>
                                 <x-form-inputtext label="Başlık Adı Giriniz" name="title:{{ $localeCode }}"/>
-                                <x-form-textarea label="Kısa Açıklama" name="short:{{ $localeCode }}"/>
+                                <x-form-textarea label="Kısa Açıklama" name="short:{{ $localeCode }}" ck="short{{ $localeCode }}"/>
 
                                 <x-form-textarea label="Açıklama" name="desc:{{ $localeCode }}" ck="aciklama{{ $localeCode }}"/>
                                 <div class="row">
@@ -100,32 +100,44 @@
 
             <div class="form-group mb-3 row">
                 <div class="col-12 mt-1">
-                    <select class="form-control" data-placeholder="Kategori Seçiniz" multiple size="27" name="category[]" style="width: 100%">
+                    <select class="form-control" data-placeholder="Choose Category" multiple size="27" name="category[]" style="width: 100%">
                         @foreach($Kategori as $item)
                             <option value="{{ $item->id }}">
                                 {{ (!$item->parent_id) ? $item->title : '--'.$item->title }}
                             </option>
                         @endforeach
                     </select>
+                    <a href="{{ route('productcategory.create') }}">Add Category</a>
+                </div>
+            </div>
+
+            <div class="form-group mb-3 row">
+                <div class="col-12 mt-1">
+                    <select class="form-control" data-placeholder="Choose Brand"  name="brand" >
+                        @foreach($Brand as $item)
+                            <option value="{{ $item->id }}">
+                                {{ $item->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <a href="{{ route('brand.create') }}">Add Brand</a>
                 </div>
             </div>
 
             <label class="form-label">Ürün Kodu</label>
             <input type="text" placeholder="Ürün Kodu" name="sku" class="form-control">
 
-            <label class="form-label">Ürün Miktarı</label>
-            <input type="text" placeholder="Miktarı" name="option1" class="form-control">
            <div class="form-group mb-3 row">
                 <div class="col-6 mt-1">
                     <div class="input-group mb-2">
-                        <span class="input-group-text">₺</span>
-                        <input type="text" placeholder="Ürün Fiyat" name="price" class="form-control">
+                        <span class="input-group-text">€</span>
+                        <input type="text" placeholder="Price" name="price" class="form-control">
                     </div>
                 </div>
                 <div class="col-6 mt-1">
                     <div class="input-group mb-2">
-                        <span class="input-group-text">₺</span>
-                        <input type="text" placeholder="Ürün Eski Fiyat" name="old_price" class="form-control">
+                        <span class="input-group-text">€</span>
+                        <input type="text" placeholder="Old Price" name="old_price" class="form-control">
                     </div>
                 </div>
             </div>
@@ -228,7 +240,7 @@
             <div class="card-header">
                 <h4 class="card-title">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="15" y1="8" x2="15.01" y2="8" /><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" /><path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" /></svg>
-                    Kapak Resim
+                    Cover Image
                 </h4>
             </div>
 
@@ -241,7 +253,7 @@
             <div class="card-header">
                 <h4 class="card-title">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" /><line x1="9" y1="13" x2="15" y2="13" /></svg>
-                    Galeri
+                    Gallery
                     <br><span style="font-size: 12px">Birden fazla resim yükleyebilirsiniz</span>
                 </h4>
             </div>

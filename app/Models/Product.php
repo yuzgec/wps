@@ -28,6 +28,9 @@ class Product extends Model implements HasMedia,TranslatableContract,Viewable
         return $this->hasMany(ProdoctCategoryPivot::class, 'product_id', 'id');
     }
 
+    public function getBrand(){
+        return $this->hasone(Brand::class, 'id', 'brand');
+    }
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('img')->width(1000)->nonOptimized();

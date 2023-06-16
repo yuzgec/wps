@@ -19,12 +19,23 @@
                                 <a class="nav-link" href="{{ route('home') }}">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-menu-toggle py-2" id="dropdownLanguage" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <img src="/frontend/img/blank.gif" class="flag flag-us" alt="English" /> English	<i class="fas fa-angle-down fa-sm"></i>
+                                <a href="#" class="nav-link dropdown-menu-toggle py-2 text-uppercase" id="dropdownLanguage"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="true">
+                                    {{ config('app.locale') }}	<i class="fas fa-angle-down fa-sm"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownLanguage">
-                                    <li><a href="#" class="no-skin"><img src="/frontend/img/blank.gif" class="flag flag-us" alt="English" /> English</a></li>
-                                    <li><a href="#" class="no-skin"><img src="/frontend/img/blank.gif" class="flag flag-nl" alt="Dutch" /> Dutch</a></li>
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <li>
+                                            <a class="text-white no-skin"
+                                               rel="alternate"
+                                               hreflang="{{ $localeCode }}"
+                                               href="{{ LaravelLocalization::getLocalizedURL($localeCode, '/', [], true) }}">
+                                                {{ $properties['native'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>

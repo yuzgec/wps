@@ -54,7 +54,7 @@ class HomeController extends Controller
     public function product($categoryurl,$producturl){
 
         //dd($category,$product);
-        $product = Product::whereHas('translations', function ($query) use ($producturl) {
+        $product = Product::with('getBrand')->whereHas('translations', function ($query) use ($producturl) {
             $query->where('slug', $producturl);
         })->first();
 

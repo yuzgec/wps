@@ -65,7 +65,6 @@ class PageController extends Controller
 
     public function update(Request $request, Page $Update)
     {
-       //dd($request->all());
         $Update->update($request->except('_token', '_method', 'image', 'gallery','cover'));
 
         if ($request->removeImage == "1") {

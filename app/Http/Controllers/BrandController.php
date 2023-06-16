@@ -2,32 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PageCategory;
-use App\Models\Service;
-use App\Models\ServiceCategory;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class BrandController extends Controller
 {
-
     public function index()
     {
-        $All = Service::with('getCategory')->orderBy('rank')->get();
-        $Kategori = ServiceCategory::all();
-
-        return view('backend.service.index', compact('All', 'Kategori'));
+        $All = Brand::orderBy('rank')->get();
+        return view('backend.brand.index', compact('All'));
     }
 
     public function create()
     {
-        $Kategori = ServiceCategory::all();
-        return view('backend.service.create',compact('Kategori'));
+        return view('backend.brand.create');
     }
 
     public function store(Request $request)
     {
-        $New = Service::create($request->except('_token', 'image', 'gallery'));
-
+        $New = Brand::create($request->except('_token', 'image', 'gallery'));
 
         if($request->hasfile('image')){
             $New->addMedia($request->image)->toMediaCollection('page');
@@ -41,23 +34,22 @@ class ServiceController extends Controller
         $New->save();
 
         toast(SWEETALERT_MESSAGE_CREATE,'success');
-        return redirect()->route('service.index');
+        return redirect()->route('brand.index');
     }
 
     public function show($id)
     {
-        $Show = Service::findOrFail($id);
-        return view('frontend.service.index', compact('Show'));
+        $Show = Brand::findOrFail($id);
+        return view('frontend.brand.index', compact('Show'));
     }
 
     public function edit($id)
     {
-        $Edit = Service::findOrFail($id);
-        $Kategori = ServiceCategory::all();
-        return view('backend.service.edit', compact('Edit', 'Kategori'));
+        $Edit = Brand::findOrFail($id);
+        return view('backend.brand.edit', compact('Edit'));
     }
 
-    public function update(Request $request, Service $Update)
+    public function update(Request $request, Brand $Update)
     {
         $Update->update($request->except('_token', '_method','image', 'gallery','removeImage'));
 
@@ -79,43 +71,39 @@ class ServiceController extends Controller
         $Update->save();
 
         toast(SWEETALERT_MESSAGE_UPDATE,'success');
-        return redirect()->route('service.index');
+        return redirect()->route('brand.index');
 
     }
 
     public function destroy($id)
     {
-        $Delete = Service::findOrFail($id);
+        $Delete = Brand::findOrFail($id);
         $Delete->delete();
 
         toast(SWEETALERT_MESSAGE_DELETE,'success');
-        return redirect()->route('service.index');
+        return redirect()->route('brand.index');
     }
 
-    public function getTrash(){
-        $Trash = Service::onlyTrashed()->orderBy('deleted_at','desc')->get();
-        return view('backend.service.trash', compact('Trash'));
-    }
 
     public function getOrder(Request $request){
         foreach($request->get('page') as  $key => $rank ){
-            Service::where('id',$rank)->update(['rank'=>$key]);
+            Brand::where('id',$rank)->update(['rank'=>$key]);
         }
     }
 
     public function getSwitch(Request $request){
-        $update=Service::findOrFail($request->id);
+        $update=Brand::findOrFail($request->id);
         $update->status = $request->status == "true" ? 1 : 0 ;
         $update->save();
     }
 
     public function deleteGaleriDelete($id){
 
-        $Delete = Service::find($id);
+        $Delete = Brand::find($id);
         $Delete->media()->where('id', \request('image_id'))->delete();
 
         toast(SWEETALERT_MESSAGE_DELETE,'success');
-        return redirect()->route('service.edit', $id);
+        return redirect()->route('brand.edit', $id);
 
     }
 }

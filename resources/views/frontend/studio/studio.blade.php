@@ -52,6 +52,37 @@
                         </li>
                     @endforeach
                 </ul>
+
+                <h2 class="font-weight-bold text-3 mb-3">Quik Contact</h2>
+                <form class="form-style-2" action="#" method="post">
+                    @csrf
+                    <input type="hidden" name="service_name" value="{{ $show->title }}">
+                    <div class="form-row row mb-3">
+                        <div class="form-group col">
+                            <input type="text" value="" class="form-control border-0 rounded-0" name="name" placeholder="Name" required>
+                        </div>
+                    </div>
+                    <div class="form-row row mb-3">
+                        <div class="form-group col">
+                            <input type="email" value="" class="form-control border-0 rounded-0" name="email" placeholder="E-mail" required>
+                        </div>
+                    </div>
+                    <div class="form-row row mb-3">
+                        <div class="form-group col">
+                            <input type="text" value="" class="form-control border-0 rounded-0" name="email" placeholder="Phone" required>
+                        </div>
+                    </div>
+                    <div class="form-row row mb-3">
+                        <div class="form-group col">
+                            <textarea class="form-control bg-light-5 border-0 rounded-0" placeholder="Review" rows="6" name="review" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row row mb-3 mt-2">
+                        <div class="col">
+                            <input type="submit" value="SEND MESSAGE" class="btn btn-primary btn-rounded btn-block btn-h-2 btn-v-2 font-weight-bold">
+                        </div>
+                    </div>
+                </form>
                 <img src="/lichtbus-huren-westerpark.jpg" class="img-fluid" >
             </div>
             <div class="col-md-9">

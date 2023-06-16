@@ -30,6 +30,7 @@
                         <th>Resim</th>
                         <th>Ürün Adı</th>
                         <th>SKU</th>
+                        <th>Brand</th>
                         <th>Durum</th>
                         <th>Oluşturma Tarihi</th>
                         <th class="w-1"></th>
@@ -48,6 +49,9 @@
                             </td>
                             <td>
                                 {{ $item->sku }}
+                            </td>
+                            <td>
+                                {{ $item->getBrand->title }}
                             </td>
                             <td>
                                 <label class="form-check form-check-single form-switch">

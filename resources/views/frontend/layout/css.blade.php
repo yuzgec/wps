@@ -20,3 +20,6 @@
 
 <link rel="stylesheet" href="/frontend/css/skins/default.css">
 <script src="/frontend/vendor/modernizr/modernizr.min.js"></script>
+
+<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex">

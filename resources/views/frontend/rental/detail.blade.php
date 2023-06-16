@@ -50,22 +50,54 @@
             <div class="col-md-8 col-lg-9 order-1 order-md-2 mb-5 mb-md-0">
                 <div class="row">
                     @foreach($all as $item)
-                        <a href="{{ route('product', [$show->slug, $item->slug]) }}"
-                           title="{{ $item->title }}"
-                           class="text-color-light">
-                        <div class="col-sm-6 col-md-4 mb-4">
-                            <div class="image-frame image-frame-border image-frame-style-1 image-frame-effect-2 image-frame-effect-1 overlay overlay-op-4 overlay-show">
-                                <div class="image-frame-wrapper image-frame-wrapper-overlay-bottom image-frame-wrapper-overlay-bottom-show image-frame-wrapper-overlay-bottom-shadow image-frame-wrapper-overlay-bottom-shadow-light image-frame-wrapper-align-end">
-                                    <img src="{{ (!$item->getFirstMediaUrl('page')) ? '/backend/resimyok.jpg': $item->getFirstMediaUrl('page', 'img')}}" class="img-fluid" alt="{{ $item->title }} - Wester Park Studio Amsterdam">
-                                    <div class="image-frame-action flex-column align-items-center">
-                                        <h4 class="text-color-light font-weight-bold mb-0 bg-dark p-1 border-radius-0">
-                                            {{ $item->title }}
-                                        </h4>
-                                    </div>
+                        <div class="col-sm-6 col-md-4 mb-3">
+                            <div class=""  style="border:1px solid #e3e3e3">
+                                <div class="image-frame image-frame-style-1 image-frame-effect-1 mb-3">
+                                    <span class="image-frame-wrapper image-frame-wrapper-overlay-bottom image-frame-wrapper-overlay-light image-frame-wrapper-align-end">
+                                        <a href="{{ route('product', [$show->slug, $item->slug]) }}" title="{{ $item->title }}">
+                                            <img src="{{ (!$item->getFirstMediaUrl('page')) ? '/backend/resimyok.jpg': $item->getFirstMediaUrl('page', 'img')}}" class="img-fluid" alt="">
+                                        </a>
+                                        <span class="image-frame-action">
+                                            <a href="#" class="btn btn-primary btn-rounded font-weight-semibold btn-v-3 btn-fs-2">ADD WISHLIST</a>
+                                        </span>
+
+                                    </span>
                                 </div>
+
+                                <h3 class="text-color-default text-3 line-height-1" style="margin-left:8px">
+                                    <a href="{{ route('product', [$show->slug, $item->slug]) }}" title="{{ $item->title }}">
+                                        {{ $item->title }}
+                                    </a>
+                                </h3>
+
+                                <div class="row d-flex align-items-center justify-content-center m-0" >
+                                    <div class="col-4" style="border:1px solid #e3e3e3">
+                                        <span class="price font-primary text-2 font-weight-bold text-black">First Day
+                                        <br>€{{ $item->price }}</span>
+                                    </div>
+
+                                    <div class="col-4"  style="border:1px solid #e3e3e3">
+                                        <span class="price font-primary text-2 font-weight-bold text-black-50">Next Days
+                                        <br>€{{ $item->price / 2 }}</span>
+                                    </div>
+                                    <div class="col-4 text-center" style="border:1px solid #e3e3e3">
+                                        <img src="{{ $item->getBrand->getFirstMediaUrl('page') }}" alt="" class="img-fluid" style="width: 60px">
+                                        <span class="badge bg-success" style="font-size:10px">Available</span>
+
+                                    </div>
+
+                                </div>
+                                <div class="product-info ">
+                                    <div class="product-info-title">
+
+                                    </div>
+
+
+                                </div>
+
+
                             </div>
                         </div>
-                        </a>
                     @endforeach
                 </div>
                 <hr class="mt-5 mb-4">

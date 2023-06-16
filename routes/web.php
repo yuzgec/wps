@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqCategoryController;
@@ -70,6 +71,7 @@ Route::group(["prefix"=>"go", 'middleware' => ['auth','web', 'admin']],function(
     Route::auto('/contact', ContactController::class);
     Route::auto('/features', FeaturesController::class);
     Route::auto('/reference', ReferenceController::class);
+    Route::auto('/brand', BrandController::class);
 });
 
 require __DIR__.'/auth.php';
