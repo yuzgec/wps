@@ -22,8 +22,11 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
+use App\Http\Livewire\Changevat;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+
 
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');

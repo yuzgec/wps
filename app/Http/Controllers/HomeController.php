@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         $all = Product::whereHas('getCategory',  function ($query) use ($show) {
             $query->where('category_id', $show->id);
-        })->get();
+        })->orderby('created_at','desc')->get();
 
         return view('frontend.rental.detail',compact('all','show'));
     }

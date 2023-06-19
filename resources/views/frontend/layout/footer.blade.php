@@ -38,9 +38,12 @@
                 <a href="{{ route('home') }}">
                     <img alt="{{ config('app.name') }}" src="/logo.jpg" class="img-fluid" style="mix-blend-mode: multiply;">
                 </a>
-                <p>WESTERPARK STUDIO, Amsterdam'da birçok olasılığa sahip, yenilenmiş ve kapsamlı bir arabalı film ve fotoğraf stüdyosudur.</p>
+                <p class=" text-white">WESTERPARK STUDIO, Amsterdam'da birçok olasılığa sahip, yenilenmiş ve kapsamlı bir arabalı film ve fotoğraf stüdyosudur.</p>
 
-                <p> Üretim de her şey dahil hizmetlerimizin bir parçası haline geldi. Stüdyo alanını kiralamak, ışık ve ekipman kiralamak, ayrıca set ve ekip teslimatı yapmak mümkündür.</p>
+                <p class=" text-white"> Üretim de her şey dahil hizmetlerimizin bir parçası haline geldi. Stüdyo alanını kiralamak, ışık ve ekipman kiralamak, ayrıca set ve ekip teslimatı yapmak mümkündür.</p>
+
+
+
             </div>
 
 
@@ -70,6 +73,35 @@
                     </li>
 
                 </ul>
+
+                <ul class="list list-unstyled mb-3">
+
+                    <li>
+                        <a href="{{ route('home') }}" title="About Us" class="text-white">
+                            <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i> About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" title="About Us" class="text-white">
+                            <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i> Brands
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" title="About Us" class="text-white">
+                            <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i> Kiralama Sözleşmesi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" title="About Us" class="text-white">
+                            <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i> Teslimat ve IADE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" title="About Us" class="text-white">
+                            <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i> Contact Us
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-3 text-center text-lg-start mb-5 mb-lg-0">
                 @foreach($servicecategories->whereNotIn('id', 5 ) as $item)
@@ -92,7 +124,7 @@
                 <ul class="list list-unstyled mb-0">
                     @foreach($categories as $item)
                     <li>
-                        <a href="{{ route('rentals', $item->slug) }}" title="{{ $item->title }}" class="text-color-light-3">
+                        <a href="{{ route('rentals', $item->slug) }}" title="{{ $item->title }}" class="text-white">
                             <i class="fas fa-angle-right text-color-light ms-1 me-1 pe-2"></i>{{ $item->title }}
                         </a>
                     </li>

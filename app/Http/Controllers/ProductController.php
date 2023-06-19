@@ -90,8 +90,9 @@ class ProductController extends Controller
     {
         $Edit = Product::with('getCategory')->where('id',$id)->first();
         $Kategori = ProductCategory::get()->toFlatTree();
+        $Brand = Brand::all();
 
-        return view('backend.product.edit', compact('Edit', 'Kategori'));
+        return view('backend.product.edit', compact('Edit', 'Kategori','Brand'));
     }
 
     public function update(Request $request, Product $Update)

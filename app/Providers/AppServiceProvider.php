@@ -16,6 +16,7 @@ use App\View\Components\Index\CategoryDeleteModal;
 use App\View\Components\Index\DeleteModal;
 use App\View\Components\Index\Modal;
 use App\View\Components\Index\Save;
+use App\View\Components\Site\AddExtVatPrice;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -55,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
         View::share([
             'services' => Service::all(),
             'servicecategories' => ServiceCategory::all(),
-            'categories' => ProductCategory::all()
+            'categories' => ProductCategory::orderBy('rank', 'desc')->get(),
 
         ]);
     }

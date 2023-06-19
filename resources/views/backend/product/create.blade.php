@@ -114,6 +114,7 @@
             <div class="form-group mb-3 row">
                 <div class="col-12 mt-1">
                     <select class="form-control" data-placeholder="Choose Brand"  name="brand" >
+                        <option>Seçiniz</option>
                         @foreach($Brand as $item)
                             <option value="{{ $item->id }}">
                                 {{ $item->title }}
@@ -126,6 +127,7 @@
 
             <label class="form-label">Ürün Kodu</label>
             <input type="text" placeholder="Ürün Kodu" name="sku" class="form-control">
+
 
            <div class="form-group mb-3 row">
                 <div class="col-6 mt-1">
@@ -141,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3 p-1 row">
+        {{--    <div class="form-group mb-3 p-1 row">
                 <div class="mb-3">
                     <label class="form-label">Ürün Özellikleri</label>
                     <div class="divide-y">
@@ -187,54 +189,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Ürün Etiketleri</label>
-                <div class="divide-y">
-                    <div>
-                        <label class="row">
-                            <span class="col">Fırsat Ürünü</span>
-                            <span class="col-auto">
-                                <label class="form-check form-check-single form-switch">
-                                      <input class="form-check-input" type="checkbox" name="opportunity" value="0">
-                                </label>
-                              </span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="row">
-                            <span class="col">Kampanyalı Ürün</span>
-                            <span class="col-auto">
-                                <label class="form-check form-check-single form-switch">
-                                  <input class="form-check-input" type="checkbox" name="offer" value="0">
-                                </label>
-                              </span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="row">
-                            <span class="col">Çok Satan</span>
-                            <span class="col-auto">
-                                <label class="form-check form-check-single form-switch">
-                                  <input class="form-check-input" type="checkbox" name="bestselling" value="0">
-                                </label>
-                              </span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="row">
-                            <span class="col">Ücretsiz Kargo</span>
-                            <span class="col-auto">
-                                <label class="form-check form-check-single form-switch">
-                                  <input class="form-check-input" type="checkbox" name="freecargo" value="0">
-                                </label>
-                              </span>
-                        </label>
-                    </div>
-                </div>
-            </div>
+            </div>--}}
         </div>
 
+
+        <label class="form-label">Youtube Video Kodu</label>
+        <input type="text" placeholder="Youtube Kodu" name="option3" class="form-control mb-3">
 
         <div class="card">
             <div class="card-header">

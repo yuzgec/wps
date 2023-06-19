@@ -15,6 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="font-weight-bold">{{ $show->title }} - Verhuur</h1>
+                    <br><span>{{ count($all) }} products</span>
                 </div>
             </div>
         </div>

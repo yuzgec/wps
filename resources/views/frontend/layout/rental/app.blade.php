@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {!! SEO::generate() !!}
+    @livewireStyles
     @include('frontend.layout.css')
     @yield('customCSS')
+
+
 </head>
 <body>
 <div class="body">
@@ -20,6 +23,7 @@
 
 @include('frontend.layout.js')
 @yield('customJS')
+@livewireScripts
 
 </body>
 </html>

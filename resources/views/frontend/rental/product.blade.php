@@ -90,12 +90,15 @@
                              <div class="row d-flex justify-content-between align-items-center p-3">
                                  <div class="col-12 col-md-4 text-center" style="border-right:1px solid gray">
                                      <span class="font-weight-bold text-white text-4">First Day</span><br>
-                                     <span class="font-weight-bold text-white text-3">€ {{ $product->price }}</span>
+
+                                     <span class="font-weight-bold text-white text-3">€ {{ (request('extvat') == 1) ? $product->price * 1.21 : $product->price}}</span>
+
                                  </div>
                                  <div class="col-12 col-md-4 text-center">
                                      <span class="font-weight-bold text-white text-4">Next Day</span><br>
-                                     <span class="font-weight-bold text-white text-3">€ {{ $product->price / 2 }}</span>
+                                     <span class="font-weight-bold text-white text-3">€ {{ (request('extvat') == 1) ? round($product->price * 1.21) / 2 : $product->price / 2}}</span>
                                  </div>
+
                                  <div class="col-12 col-md-4 p-1 text-center">
                                      <button type="submit" class="btn btn-rounded btn-outline btn-with-arrow btn-light mb-1">
                                          Wishlist Add
@@ -103,7 +106,10 @@
                                              <i class="fas fa-chevron-right"></i>
                                          </span>
                                      </button>
-                                     <span class="text-white">Excluding VAT</span>
+                                     <a class="btn btn-link text-white"
+                                        href="{{ (request('extvat') == 1) ? url()->current() : url()->current().'?extvat=1' }}">
+                                         {{ (request('extvat') == 1) ? 'Include VAT' : 'Excluding VAT'  }}
+                                     </a>
                                  </div>
                              </div>
                         </div>
@@ -159,15 +165,17 @@
                                    aria-expanded="true">DESCRIPTION
                                 </a>
                             </li>
+                            @if($product->option3 )
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold"
                                    id="productDetailMoreInfoTab"
                                    data-bs-toggle="tab"
                                    href="#productDetailMoreInfo"
                                    role="tab"
-                                   aria-controls="productDetailMoreInfo">MORE INFO
+                                   aria-controls="productDetailMoreInfo">VIDEO
                                 </a>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold"
                                    id="productDetailReviewsTab"
@@ -181,121 +189,17 @@
                             <div class="tab-pane fade pt-4 pb-4 show active" id="productDetailDesc" role="tabpanel" aria-labelledby="productDetailDescTab">
                                 {!! $product->desc !!}
                             </div>
-                            <div class="tab-pane fade pt-4 pb-4" id="productDetailMoreInfo" role="tabpanel" aria-labelledby="productDetailMoreInfoTab">
 
+                            <div class="tab-pane fade pt-4 pb-4" id="productDetailMoreInfo" role="tabpanel" aria-labelledby="productDetailMoreInfoTab">
+                                <iframe width="100%" height="550" src="https://www.youtube.com/embed/{{ $product->option3 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             </div>
+
                             <div class="tab-pane fade pt-4 pb-4" id="productDetailReviews" role="tabpanel" aria-labelledby="productDetailReviewsTab">
                                 <ul class="comments">
-                                    <li>
-                                        <div class="comment">
-                                            <div class="d-none d-sm-block">
-                                                <img class="avatar rounded-circle" alt="" src="/frontend/img/authors/author-2.jpg">
-                                            </div>
-                                            <div class="comment-block">
-                                                <span class="comment-by">
-                                                    <span class="comment-rating">
-                                                        <i class="fas fa-star text-color-dark me-1"></i>
-                                                        <i class="fas fa-star text-color-dark me-1"></i>
-                                                        <i class="fas fa-star text-color-dark me-1"></i>
-                                                        <i class="fas fa-star text-color-dark me-1"></i>
-                                                        <i class="fas fa-star text-color-dark"></i>
-                                                    </span>
-                                                    <strong class="comment-author text-color-dark">Robert Doe</strong>
-                                                    <span class="comment-date border-end-0 text-color-light-3">MARCH 5, 2021 at 2:28 pm</span>
-                                                </span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="d-none d-sm-block">
-                                                <img class="avatar rounded-circle" alt="" src="/frontend/img/authors/author-1.jpg">
-                                            </div>
-                                            <div class="comment-block">
-															<span class="comment-by">
-																<span class="comment-rating">
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star-half text-color-dark"></i>
-																</span>
-																<strong class="comment-author text-color-dark">John Doe</strong>
-																<span class="comment-date border-end-0 text-color-light-3">MARCH 5, 2021 at 2:28 pm</span>
-															</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="d-none d-sm-block">
-                                                <img class="avatar rounded-circle" alt="" src="/frontend/img/authors/author-3.jpg">
-                                            </div>
-                                            <div class="comment-block">
-															<span class="comment-by">
-																<span class="comment-rating">
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																	<i class="fas fa-star text-color-dark me-1"></i>
-																</span>
-																<strong class="comment-author text-color-dark">Jessica Doe</strong>
-																<span class="comment-date border-end-0 text-color-light-3">MARCH 5, 2021 at 2:28 pm</span>
-															</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. </p>
-                                            </div>
-                                        </div>
-                                    </li>
+
                                 </ul>
 
-                                <div class="row mt-4 pt-2">
-                                    <div class="col">
-                                        <h2 class="font-weight-bold text-3 mb-3">LEAVE A REVIEW</h2>
-                                        <form class="form-style-2" action="#" method="post">
-                                            <div class="form-row row mb-3">
-                                                <div class="form-group">
-                                                    <div class="rating p-1">
-                                                        <label>
-                                                            <input type="radio" name="rating" value="5" title="5 stars"> 5
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="rating" value="4" title="4 stars"> 4
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="rating" value="3" title="3 stars"> 3
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="rating" value="2" title="2 stars"> 2
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="rating" value="1" title="1 star"> 1
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row row mb-3">
-                                                <div class="form-group col">
-                                                    <textarea class="form-control bg-light-5 border-0 rounded-0" placeholder="Review" rows="6" name="review" required></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-row row mb-3">
-                                                <div class="form-group col-md-6">
-                                                    <input type="text" value="" class="form-control border-0 rounded-0" name="name" placeholder="Name" required>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <input type="email" value="" class="form-control border-0 rounded-0" name="email" placeholder="E-mail" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-row row mb-3 mt-2">
-                                                <div class="col">
-                                                    <input type="submit" value="POST REVIEW" class="btn btn-primary btn-rounded btn-h-2 btn-v-2 font-weight-bold">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

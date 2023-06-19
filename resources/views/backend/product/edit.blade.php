@@ -145,11 +145,24 @@
                         </select>
                     </div>
                 </div>
+
+
+                <div class="form-group mb-3 row">
+                    <div class="col-12 mt-1">
+                        <select class="form-control" data-placeholder="Choose Brand"  name="brand" >
+                            @foreach($Brand as $item)
+                                <option value="{{ $item->id }}" {{ $Edit->brand == $item->id ? 'selected' : null}}>
+                                    {{ $item->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <label class="form-label">SKU</label>
                 <input type="text" placeholder="Ürün Kodu" class="form-control mb-2" value="{{ $Edit->sku }}">
-{{--
-                <label class="form-label">Ürün Miktarı</label>
-                <input type="text" placeholder="Miktarı" name="option1" class="form-control" value="{{ $Edit->option1 }}">--}}
+
+
 
               <div class="form-group mb-2 row">
                     <div class="col-6">
@@ -158,14 +171,14 @@
                             <input type="text" placeholder="Ürün Fiyat" class="form-control" name="price" value="{{ $Edit->price }}">
                         </div>
                     </div>
-                    <div class="col-6 mt-1">
+                    <div class="col-6">
                         <div class="input-group mb-2">
                             <span class="input-group-text">€</span>
-                            <input type="text" placeholder="Ürün Eski Fiyat" name="old_price" class="form-control" value="{{ $Edit->old_price }}">
+                            <input type="text" placeholder="Eski Fiyat" name="old_price" class="form-control" value="{{ $Edit->old_price }}">
                         </div>
                     </div>
                 </div>
-                <div class="form-group mb-3 p-1 row">
+           {{--     <div class="form-group mb-3 p-1 row">
                     <div class="mb-3">
                         <label class="form-label">Ürün Özellikleri</label>
                         <div class="divide-y">
@@ -292,7 +305,7 @@
                             </label>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
 
             <div class="card">
@@ -317,6 +330,8 @@
                 </div>
 
             </div>
+            <label class="form- mt-2 ">Youtube Video</label>
+            <input type="text" placeholder="Youtube Video" name="option3" class="form-control mb-2" value="{{ $Edit->option3 }}">
 
             <div class="card mt-2" >
                 <div class="card-header">
