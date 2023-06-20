@@ -9,7 +9,7 @@
                     <ul class="breadcrumb">
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('rental') }}">Rental</a></li>
-                        <li><a href="{{ route('rental') }}">Kategori</a></li>
+                        <li><a href="{{ route('rental') }}">{{ $c->title }}</a></li>
                         <li class="active">{{ $product->title }}</li>
                     </ul>
                 </div>
@@ -17,6 +17,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="font-weight-bold">{{ $product->title }} Verhuur</h1>
+                    @if(auth()->user()->is_admin == 1)
+                    <p> <a href="{{ route('product.edit',$product->id) }}" target="_blank">Ürünü Düzenle</a></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -100,12 +103,7 @@
                                  </div>
 
                                  <div class="col-12 col-md-4 p-1 text-center">
-                                     <button type="submit" class="btn btn-rounded btn-outline btn-with-arrow btn-light mb-1">
-                                         Wishlist Add
-                                         <span>
-                                             <i class="fas fa-chevron-right"></i>
-                                         </span>
-                                     </button>
+                                    <livewire:add-cart :product="$product" />
                                      <a class="btn btn-link text-white"
                                         href="{{ (request('extvat') == 1) ? url()->current() : url()->current().'?extvat=1' }}">
                                          {{ (request('extvat') == 1) ? 'Include VAT' : 'Excluding VAT'  }}

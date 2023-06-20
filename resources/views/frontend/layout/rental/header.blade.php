@@ -83,10 +83,10 @@
                         </div>
                     </form>
                     <div class="mini-cart order-4 me-3 me-sm-0">
-                        <span class="font-weight-bold font-primary d-none d-sm-block">Cart / <span class="cart-total">€ 0.00</span></span>
+                        <span class="font-weight-bold font-primary d-none d-sm-block">Cart / <span class="cart-total">€ {{ Cart::total() }}</span></span>
                         <div class="mini-cart-icon">
                             <img src="/frontend/img/icons/cart-bag.svg" class="img-fluid" alt="" />
-                            <span class="badge badge-primary rounded-circle">0</span>
+                            <span class="badge badge-primary rounded-circle">{{ Cart::instance('shopping')->content()->count() }}</span>
                         </div>
                         <div class="mini-cart-content">
                             <div class="inner-wrapper bg-light rounded">

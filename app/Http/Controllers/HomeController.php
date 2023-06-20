@@ -36,10 +36,6 @@ class HomeController extends Controller
 
     public function rentals($url){
 
-        SEOMeta::setTitle("Apparatuur Verhuur | WesterPark Studio | Amsterdam");
-        SEOMeta::setDescription("Wester Park Studio");
-        SEOMeta::setCanonical(url()->full());
-
         $show = ProductCategory::whereHas('translations', function ($query) use ($url) {
             $query->where('slug', $url);
         })->first();
@@ -48,23 +44,32 @@ class HomeController extends Controller
             $query->where('category_id', $show->id);
         })->orderby('created_at','desc')->get();
 
+        SEOMeta::setTitle($show->title ." | Apparatuur Verhuur | WesterPark Studio | Amsterdam");
+        SEOMeta::setDescription("Wester Park Studio");
+        SEOMeta::setCanonical(url()->full());
+
         return view('frontend.rental.detail',compact('all','show'));
     }
 
     public function product($categoryurl,$producturl){
 
         //dd($category,$product);
+
+        $c= ProductCategory::whereHas('translations', function ($query) use ($categoryurl) {
+            $query->where('slug', $categoryurl);
+        })->first();
+
         $product = Product::with('getBrand')->whereHas('translations', function ($query) use ($producturl) {
             $query->where('slug', $producturl);
         })->first();
 
         //dd($product);
 
-        SEOMeta::setTitle("WesterPark Studio | Amsterdam");
+        SEOMeta::setTitle($product->title. ' Verhuur'." | WesterPark Studio | Amsterdam");
         SEOMeta::setDescription("Wester Park Studio");
         SEOMeta::setCanonical(url()->full());
 
-        return view('frontend.rental.product', compact('product'));
+        return view('frontend.rental.product', compact('product','c'));
     }
 
     public function studio(){
@@ -203,4 +208,4 @@ class HomeController extends Controller
 
         return view('frontend.studio.service');
     }
-}
+ }

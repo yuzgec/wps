@@ -14,7 +14,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        $All = Product::with('getCategory')->orderBy('id', 'desc')->get();
+        $All = Product::with('getCategory')->orderBy('id', 'desc')->paginate(30);
+
+        if (request()->filled('q')){
+            $All = Product::with(['getCategory', 'translations'])
+                ->where('title', 'like', '%'. request('q'). '%')
+                ->orWhere('slug', 'like', '%'. request('q'). '%')
+                ->orderBy('rank')
+                ->paginate(30);
+        }
+
 
         $Kategori = ProductCategory::get()->toFlatTree();
         return view('backend.product.index', compact('All', 'Kategori'));
